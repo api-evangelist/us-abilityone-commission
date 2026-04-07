@@ -2,8 +2,7 @@ aid: us-abilityone-commission
 url: >-
   https://raw.githubusercontent.com/api-search/us-abilityone-commission/refs/heads/main/apis.yml
 name: US AbilityOne Commission
-tags:
-  - API
+tags: []
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
