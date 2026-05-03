@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://www.abilityone.gov/structure/service.json",
+  "title": "Service",
+  "description": "An AbilityOne Procurement List service",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "description": "Service identifier",
+      "type": "string"
+    },
+    {
+      "name": "serviceType",
+      "description": "Type of service",
+      "type": "string"
+    },
+    {
+      "name": "description",
+      "description": "Service description",
+      "type": "string"
+    },
+    {
+      "name": "location",
+      "description": "Location where service is performed",
+      "type": "string"
+    },
+    {
+      "name": "state",
+      "description": "State abbreviation",
+      "type": "string"
+    },
+    {
+      "name": "nonprofitAffiliate",
+      "description": "Central nonprofit affiliate",
+      "type": "string"
+    },
+    {
+      "name": "performingAgency",
+      "description": "Name of nonprofit agency performing the service",
+      "type": "string"
+    },
+    {
+      "name": "approvalDate",
+      "description": "Date service was added to the Procurement List",
+      "type": "date"
+    },
+    {
+      "name": "status",
+      "description": "Service status",
+      "type": "string"
+    }
+  ]
+}

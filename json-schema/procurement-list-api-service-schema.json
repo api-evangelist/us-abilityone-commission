@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.abilityone.gov/schema/service.json",
+  "title": "Service",
+  "description": "An AbilityOne Procurement List service",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Service identifier",
+      "type": "string",
+      "example": "svc-00123"
+    },
+    "serviceType": {
+      "description": "Type of service",
+      "type": "string",
+      "example": "Custodial"
+    },
+    "description": {
+      "description": "Service description",
+      "type": "string",
+      "example": "Custodial services at federal building"
+    },
+    "location": {
+      "description": "Location where service is performed",
+      "type": "string",
+      "example": "Pentagon, Arlington, VA"
+    },
+    "state": {
+      "description": "State abbreviation",
+      "type": "string",
+      "example": "VA"
+    },
+    "nonprofitAffiliate": {
+      "description": "Central nonprofit affiliate",
+      "type": "string",
+      "enum": [
+        "NIB",
+        "SourceAmerica"
+      ]
+    },
+    "performingAgency": {
+      "description": "Name of nonprofit agency performing the service",
+      "type": "string",
+      "example": "SERVICEMASTER"
+    },
+    "approvalDate": {
+      "description": "Date service was added to the Procurement List",
+      "type": "string",
+      "format": "date",
+      "example": "2010-06-01"
+    },
+    "status": {
+      "description": "Service status",
+      "type": "string",
+      "enum": [
+        "active",
+        "deleted"
+      ]
+    }
+  }
+}

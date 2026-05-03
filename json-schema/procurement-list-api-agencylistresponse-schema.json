@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.abilityone.gov/schema/agencylistresponse.json",
+  "title": "AgencyListResponse",
+  "description": "List of nonprofit agencies",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": "integer",
+      "example": 93
+    },
+    "agencies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Agency"
+      }
+    }
+  }
+}

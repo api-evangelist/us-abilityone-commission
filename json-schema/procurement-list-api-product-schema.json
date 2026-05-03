@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.abilityone.gov/schema/product.json",
+  "title": "Product",
+  "description": "An AbilityOne Procurement List product identified by National Stock Number",
+  "type": "object",
+  "properties": {
+    "nsn": {
+      "description": "National Stock Number (primary identifier)",
+      "type": "string",
+      "example": "7510-01-234-5678"
+    },
+    "description": {
+      "description": "Short product description",
+      "type": "string",
+      "example": "PEN, BALLPOINT"
+    },
+    "longDescription": {
+      "description": "Detailed product description",
+      "type": "string",
+      "example": "Ballpoint pen, retractable, medium point, black ink"
+    },
+    "nonprofitAffiliate": {
+      "description": "Central nonprofit agency affiliate (NIB or SourceAmerica)",
+      "type": "string",
+      "enum": [
+        "NIB",
+        "SourceAmerica"
+      ]
+    },
+    "performingAgency": {
+      "description": "Name of the nonprofit agency producing the product",
+      "type": "string",
+      "example": "Lighthouse for the Blind - St. Louis"
+    },
+    "unitOfMeasure": {
+      "description": "Unit of measure for ordering",
+      "type": "string",
+      "example": "DZ"
+    },
+    "unitPrice": {
+      "description": "Unit price in USD",
+      "type": "number",
+      "example": 4.85
+    },
+    "approvalDate": {
+      "description": "Date product was added to the Procurement List",
+      "type": "string",
+      "format": "date",
+      "example": "2005-03-15"
+    },
+    "status": {
+      "description": "Product status on the Procurement List",
+      "type": "string",
+      "enum": [
+        "active",
+        "deleted"
+      ]
+    },
+    "federalSupplyClass": {
+      "description": "Federal Supply Class (FSC) code",
+      "type": "string",
+      "example": "7510"
+    },
+    "productGroupName": {
+      "description": "Product group or category name",
+      "type": "string",
+      "example": "Office Supplies"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.abilityone.gov/schema/servicesearchresponse.json",
+  "title": "ServiceSearchResponse",
+  "description": "Paginated search results for Procurement List services",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": "integer",
+      "example": 12
+    },
+    "offset": {
+      "type": "integer",
+      "example": 0
+    },
+    "limit": {
+      "type": "integer",
+      "example": 25
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Service"
+      }
+    }
+  }
+}

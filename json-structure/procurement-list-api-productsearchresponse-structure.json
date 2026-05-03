@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://www.abilityone.gov/structure/productsearchresponse.json",
+  "title": "ProductSearchResponse",
+  "description": "Paginated search results for Procurement List products",
+  "type": "record",
+  "fields": [
+    {
+      "name": "total",
+      "description": "Total matching products",
+      "type": "int32"
+    },
+    {
+      "name": "offset",
+      "description": "Pagination offset",
+      "type": "int32"
+    },
+    {
+      "name": "limit",
+      "description": "Page size",
+      "type": "int32"
+    },
+    {
+      "name": "products",
+      "description": "List of matching products",
+      "type": {
+        "type": "array",
+        "items": "product"
+      }
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+rules:
+
+  # Info Rules
+  abi-info-title-present:
+    description: API info must have a title
+    message: Info object must have a title
+    severity: error
+    given: $.info
+    then:
+      field: title
+      function: truthy
+
+  abi-info-description-present:
+    description: API info must have a description
+    message: Info object must have a description
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: truthy
+
+  abi-info-version-present:
+    description: API info must have a version
+    message: Info object must have a version
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  abi-info-contact-present:
+    description: Government APIs must have contact information
+    message: Info object must have contact details for government APIs
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  # OpenAPI Version Rules
+  abi-openapi-version:
+    description: Must use OpenAPI 3.x
+    message: OpenAPI version must be 3.x
+    severity: error
+    given: $
+    then:
+      field: openapi
+      function: pattern
+      functionOptions:
+        match: "^3\\."
+
+  # Server Rules
+  abi-servers-present:
+    description: API must define servers
+    message: Servers array must be defined
+    severity: warn
+    given: $
+    then:
+      field: servers
+      function: truthy
+
+  abi-server-url-https:
+    description: Server URLs should use HTTPS
+    message: "Server URL should use HTTPS: {{value}}"
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  abi-server-gov-domain:
+    description: Government APIs should use .gov domains
+    message: "Government API server should use a .gov domain: {{value}}"
+    severity: hint
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://[^/]+\\.gov"
+
+  # Path Rules
+  abi-paths-present:
+    description: API must define paths
+    message: Paths object must be defined and non-empty
+    severity: error
+    given: $
+    then:
+      field: paths
+      function: truthy
+
+  abi-path-lowercase:
+    description: Path segments should be lowercase
+    message: "Path should use lowercase letters: {{value}}"
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/[a-z0-9/_{}.-]*$"
+
+  # Operation Rules
+  abi-operation-id-present:
+    description: All operations must have an operationId
+    message: Operation must have an operationId
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  abi-operation-summary-present:
+    description: All operations must have a summary
+    message: Operation must have a summary
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  abi-operation-description-present:
+    description: All operations should have a description
+    message: Operation should have a description
+    severity: hint
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  abi-operation-tags-present:
+    description: All operations must have at least one tag
+    message: Operation must have at least one tag
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  # Response Rules
+  abi-response-description-present:
+    description: All responses must have a description
+    message: Response must have a description
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    then:
+      field: description
+      function: truthy
+
+  abi-response-success-present:
+    description: Operations must define a 2xx success response
+    message: Operation must define a 2xx response
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: ["200"]
+            - required: ["201"]
+            - required: ["202"]
+            - required: ["204"]
+
+  # Schema Rules
+  abi-schema-description-present:
+    description: All schemas should have a description
+    message: Schema should have a description
+    severity: hint
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  abi-schema-properties-examples:
+    description: Schema properties should include examples
+    message: Schema property should have an example value
+    severity: hint
+    given: $.components.schemas[*].properties[*]
+    then:
+      field: example
+      function: truthy
+
+  # Government-Specific Rules
+  abi-nsn-format-pattern:
+    description: NSN fields should define the correct format pattern
+    message: NSN parameter should include format pattern xxxx-xx-xxx-xxxx
+    severity: hint
+    given: $.paths[*][get,post].parameters[?(@.name == 'nsn')].schema
+    then:
+      field: pattern
+      function: truthy
+
+  abi-status-enum-defined:
+    description: Status fields should use an enum to restrict values
+    message: Status property should define an enum
+    severity: warn
+    given: $.components.schemas[*].properties.status
+    then:
+      field: enum
+      function: truthy
+
+  abi-nonprofit-affiliate-enum:
+    description: Nonprofit affiliate fields should restrict to NIB or SourceAmerica
+    message: nonprofitAffiliate should define an enum with NIB and SourceAmerica
+    severity: warn
+    given: $.components.schemas[*].properties.nonprofitAffiliate
+    then:
+      field: enum
+      function: truthy
+
+  # HTTP Method Rules
+  abi-get-no-request-body:
+    description: GET operations should not have a request body
+    message: GET operation should not have a request body
+    severity: warn
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: falsy
+
+  # Quality Rules
+  abi-microcks-operation-present:
+    description: Operations should include Microcks extension for mocking
+    message: Operation should have x-microcks-operation extension
+    severity: hint
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  abi-examples-in-responses:
+    description: Responses should include examples for documentation
+    message: Response content should include examples
+    severity: hint
+    given: $.paths[*][get,post,put,patch,delete].responses[*].content[*]
+    then:
+      field: examples
+      function: truthy
+
+  abi-parameter-description-present:
+    description: All parameters should have a description
+    message: Parameter must have a description
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: description
+      function: truthy

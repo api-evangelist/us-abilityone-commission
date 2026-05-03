@@ -1,0 +1,12 @@
+{
+  "id": "agency-001",
+  "name": "Lighthouse for the Blind - St. Louis",
+  "affiliate": "NIB",
+  "state": "MO",
+  "city": "St. Louis",
+  "address": "4244 Forest Park Ave, St. Louis, MO 63108",
+  "phone": "314-842-1180",
+  "website": "https://www.blindmissouri.org",
+  "employeesBlind": 125,
+  "employeesDisabled": 45
+}

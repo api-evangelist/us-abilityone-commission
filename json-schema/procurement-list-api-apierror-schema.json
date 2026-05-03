@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.abilityone.gov/schema/apierror.json",
+  "title": "APIError",
+  "description": "API error response",
+  "type": "object",
+  "properties": {
+    "error": {
+      "description": "Error code",
+      "type": "string",
+      "example": "not_found"
+    },
+    "message": {
+      "description": "Human-readable error message",
+      "type": "string",
+      "example": "NSN not found on Procurement List."
+    },
+    "code": {
+      "description": "HTTP status code",
+      "type": "integer",
+      "example": 404
+    }
+  }
+}

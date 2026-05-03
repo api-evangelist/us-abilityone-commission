@@ -1,0 +1,77 @@
+info:
+  title: US AbilityOne Commission Vocabulary
+  description: >-
+    Unified taxonomy mapping resources, actions, workflows, and personas across
+    the AbilityOne Procurement List API operational and capability dimensions.
+    Reflects the Javits-Wagner-O'Day Act framework for disability employment
+    in federal procurement.
+  version: '1.0.0'
+
+operational:
+  resources:
+    - name: Product
+      description: An AbilityOne Procurement List product identified by National Stock Number (NSN)
+      aliases: [procurement-product, nsn-item, supply-item]
+    - name: Service
+      description: An AbilityOne Procurement List service performed by a nonprofit agency
+      aliases: [procurement-service, contracted-service]
+    - name: Agency
+      description: A nonprofit agency participating in the AbilityOne program employing people with disabilities
+      aliases: [nonprofit-agency, participating-agency, abilityone-agency]
+    - name: ProductSearchResponse
+      description: Paginated search results for Procurement List products
+      aliases: [product-results, nsn-search-results]
+    - name: ServiceSearchResponse
+      description: Paginated search results for Procurement List services
+      aliases: [service-results]
+    - name: AgencyListResponse
+      description: List of nonprofit agencies participating in the AbilityOne program
+      aliases: [agency-directory, nonprofit-list]
+    - name: APIError
+      description: Error response from the AbilityOne PLIMS API
+      aliases: [error, fault]
+  actions:
+    - name: Search
+      description: Query the Procurement List for products or services matching criteria
+      httpMethod: GET
+      aliases: [find, query, lookup]
+    - name: Get
+      description: Retrieve a specific item from the Procurement List by identifier (NSN)
+      httpMethod: GET
+      aliases: [fetch, retrieve, lookup-by-nsn]
+    - name: List
+      description: Retrieve a paginated collection of agencies or other resources
+      httpMethod: GET
+      aliases: [index, browse]
+    - name: Download
+      description: Retrieve a bulk data report in Excel or CSV format
+      httpMethod: GET
+      aliases: [export, report, bulk-download]
+
+capability:
+  workflows:
+    - name: Disability Employment Procurement
+      description: >-
+        Federal procurement workflow for identifying and ordering products and
+        services from AbilityOne nonprofit agencies under the JWOD Act mandate
+      apis:
+        - Procurement List API
+  personas:
+    - name: Contracting Officer
+      description: Federal contracting officers responsible for verifying AbilityOne mandatory source requirements
+      goals:
+        - Verify if a product NSN is on the Procurement List
+        - Identify the performing nonprofit agency for a product
+        - Ensure acquisition complies with JWOD Act requirements
+    - name: Procurement Specialist
+      description: Acquisition personnel searching for compliant sources for products and services
+      goals:
+        - Search Procurement List by description or service type
+        - Find nonprofit agencies serving a geographic area
+        - Download Procurement List for offline reference
+    - name: Agency Procurement Manager
+      description: Federal agency managers overseeing AbilityOne compliance across the agency
+      goals:
+        - Monitor agency AbilityOne spend compliance
+        - Access full Procurement List data for planning
+        - Identify AbilityOne sources for upcoming requirements

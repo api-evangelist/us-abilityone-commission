@@ -1,0 +1,132 @@
+name: AbilityOne Procurement List API
+description: >-
+  Shared capability definition for the AbilityOne Procurement List Information
+  Management System (PLIMS). Covers product search by NSN, service search,
+  nonprofit agency directory, and report downloads from the AbilityOne
+  Procurement List maintained by the US AbilityOne Commission.
+version: '1.0.0'
+baseUrl: https://plims.abilityone.gov
+mcp:
+  port: 9120
+rest:
+  port: 8120
+operations:
+  - operationId: searchProducts
+    name: Search Procurement List Products
+    description: Search the AbilityOne Procurement List for products by NSN, description, or agency
+    method: GET
+    path: /api/products
+    parameters:
+      - name: nsn
+        in: query
+        description: National Stock Number
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: Product description keyword
+        schema:
+          type: string
+      - name: nonprofit
+        in: query
+        description: Filter by NIB or SourceAmerica
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 25
+    responses:
+      - status: 200
+        description: Procurement list product search results
+
+  - operationId: getProduct
+    name: Get Product by NSN
+    description: Retrieve detailed information for a specific product by National Stock Number
+    method: GET
+    path: /api/products/{nsn}
+    parameters:
+      - name: nsn
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      - status: 200
+        description: Product details
+      - status: 404
+        description: Product not found
+
+  - operationId: searchServices
+    name: Search Procurement List Services
+    description: Search the AbilityOne Procurement List for services by type, state, or agency
+    method: GET
+    path: /api/services
+    parameters:
+      - name: serviceType
+        in: query
+        description: Type of service
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: State abbreviation
+        schema:
+          type: string
+      - name: nonprofit
+        in: query
+        schema:
+          type: string
+    responses:
+      - status: 200
+        description: Service search results
+
+  - operationId: listAgencies
+    name: List Nonprofit Agencies
+    description: Retrieve participating AbilityOne nonprofit agencies filtered by affiliate or state
+    method: GET
+    path: /api/agencies
+    parameters:
+      - name: affiliate
+        in: query
+        description: Filter by NIB or SourceAmerica
+        schema:
+          type: string
+      - name: state
+        in: query
+        schema:
+          type: string
+    responses:
+      - status: 200
+        description: List of nonprofit agencies
+
+  - operationId: downloadProductReport
+    name: Download Products List Report
+    description: Download the complete Procurement List products report in Excel or CSV format
+    method: GET
+    path: /api/reports/products
+    parameters:
+      - name: format
+        in: query
+        description: Output format (excel or csv)
+        schema:
+          type: string
+    responses:
+      - status: 200
+        description: Products report file
+
+  - operationId: downloadServiceReport
+    name: Download Services List Report
+    description: Download the complete Procurement List services report in Excel or CSV format
+    method: GET
+    path: /api/reports/services
+    parameters:
+      - name: format
+        in: query
+        description: Output format (excel or csv)
+        schema:
+          type: string
+    responses:
+      - status: 200
+        description: Services report file

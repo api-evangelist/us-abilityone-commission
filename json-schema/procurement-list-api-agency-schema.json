@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.abilityone.gov/schema/agency.json",
+  "title": "Agency",
+  "description": "A nonprofit agency participating in the AbilityOne program",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Agency identifier",
+      "type": "string",
+      "example": "agency-001"
+    },
+    "name": {
+      "description": "Agency name",
+      "type": "string",
+      "example": "Lighthouse for the Blind - St. Louis"
+    },
+    "affiliate": {
+      "description": "Central nonprofit affiliate",
+      "type": "string",
+      "enum": [
+        "NIB",
+        "SourceAmerica"
+      ]
+    },
+    "state": {
+      "description": "State abbreviation",
+      "type": "string",
+      "example": "MO"
+    },
+    "city": {
+      "description": "City",
+      "type": "string",
+      "example": "St. Louis"
+    },
+    "address": {
+      "description": "Mailing address",
+      "type": "string",
+      "example": "4244 Forest Park Ave, St. Louis, MO 63108"
+    },
+    "phone": {
+      "description": "Contact phone number",
+      "type": "string",
+      "example": "314-842-1180"
+    },
+    "website": {
+      "description": "Agency website URL",
+      "type": "string",
+      "example": "https://www.blindmissouri.org"
+    },
+    "employeesBlind": {
+      "description": "Number of employees who are blind",
+      "type": "integer",
+      "example": 125
+    },
+    "employeesDisabled": {
+      "description": "Number of employees with significant disabilities",
+      "type": "integer",
+      "example": 45
+    }
+  }
+}

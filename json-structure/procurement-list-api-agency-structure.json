@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://www.abilityone.gov/structure/agency.json",
+  "title": "Agency",
+  "description": "A nonprofit agency participating in the AbilityOne program",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "description": "Agency identifier",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "description": "Agency name",
+      "type": "string"
+    },
+    {
+      "name": "affiliate",
+      "description": "Central nonprofit affiliate",
+      "type": "string"
+    },
+    {
+      "name": "state",
+      "description": "State abbreviation",
+      "type": "string"
+    },
+    {
+      "name": "city",
+      "description": "City",
+      "type": "string"
+    },
+    {
+      "name": "address",
+      "description": "Mailing address",
+      "type": "string"
+    },
+    {
+      "name": "phone",
+      "description": "Contact phone number",
+      "type": "string"
+    },
+    {
+      "name": "website",
+      "description": "Agency website URL",
+      "type": "string"
+    },
+    {
+      "name": "employeesBlind",
+      "description": "Number of employees who are blind",
+      "type": "int32"
+    },
+    {
+      "name": "employeesDisabled",
+      "description": "Number of employees with significant disabilities",
+      "type": "int32"
+    }
+  ]
+}

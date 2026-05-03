@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://www.abilityone.gov/structure/agencylistresponse.json",
+  "title": "AgencyListResponse",
+  "description": "List of nonprofit agencies",
+  "type": "record",
+  "fields": [
+    {
+      "name": "total",
+      "type": "int32"
+    },
+    {
+      "name": "agencies",
+      "type": {
+        "type": "array",
+        "items": "agency"
+      }
+    }
+  ]
+}

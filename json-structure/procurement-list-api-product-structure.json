@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://www.abilityone.gov/structure/product.json",
+  "title": "Product",
+  "description": "An AbilityOne Procurement List product identified by National Stock Number",
+  "type": "record",
+  "fields": [
+    {
+      "name": "nsn",
+      "description": "National Stock Number (primary identifier)",
+      "type": "string"
+    },
+    {
+      "name": "description",
+      "description": "Short product description",
+      "type": "string"
+    },
+    {
+      "name": "longDescription",
+      "description": "Detailed product description",
+      "type": "string"
+    },
+    {
+      "name": "nonprofitAffiliate",
+      "description": "Central nonprofit agency affiliate (NIB or SourceAmerica)",
+      "type": "string"
+    },
+    {
+      "name": "performingAgency",
+      "description": "Name of the nonprofit agency producing the product",
+      "type": "string"
+    },
+    {
+      "name": "unitOfMeasure",
+      "description": "Unit of measure for ordering",
+      "type": "string"
+    },
+    {
+      "name": "unitPrice",
+      "description": "Unit price in USD",
+      "type": "double"
+    },
+    {
+      "name": "approvalDate",
+      "description": "Date product was added to the Procurement List",
+      "type": "date"
+    },
+    {
+      "name": "status",
+      "description": "Product status on the Procurement List",
+      "type": "string"
+    },
+    {
+      "name": "federalSupplyClass",
+      "description": "Federal Supply Class (FSC) code",
+      "type": "string"
+    },
+    {
+      "name": "productGroupName",
+      "description": "Product group or category name",
+      "type": "string"
+    }
+  ]
+}

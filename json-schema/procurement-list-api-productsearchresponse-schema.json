@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.abilityone.gov/schema/productsearchresponse.json",
+  "title": "ProductSearchResponse",
+  "description": "Paginated search results for Procurement List products",
+  "type": "object",
+  "properties": {
+    "total": {
+      "description": "Total matching products",
+      "type": "integer",
+      "example": 48
+    },
+    "offset": {
+      "description": "Pagination offset",
+      "type": "integer",
+      "example": 0
+    },
+    "limit": {
+      "description": "Page size",
+      "type": "integer",
+      "example": 25
+    },
+    "products": {
+      "description": "List of matching products",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Product"
+      }
+    }
+  }
+}

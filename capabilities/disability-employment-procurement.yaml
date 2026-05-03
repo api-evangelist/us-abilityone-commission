@@ -1,0 +1,78 @@
+name: AbilityOne Disability Employment Procurement
+description: >-
+  Workflow capability for the AbilityOne Program procurement operations. Enables
+  federal contracting officers, procurement specialists, and acquisition teams
+  to search the AbilityOne Procurement List, verify mandatory source requirements
+  under the Javits-Wagner-O'Day Act, and identify nonprofit agencies employing
+  people who are blind or have significant disabilities.
+version: '1.0.0'
+mcp:
+  port: 9080
+rest:
+  port: 8080
+personas:
+  - name: Contracting Officer
+    description: >-
+      Federal contracting officers verifying mandatory source requirements and
+      identifying AbilityOne sources for procurement actions
+  - name: Procurement Specialist
+    description: >-
+      Acquisition personnel searching the Procurement List to find compliant
+      sources for products and services
+  - name: Agency Procurement Manager
+    description: >-
+      Federal agency procurement managers managing AbilityOne compliance
+      across their agency's acquisition portfolio
+tools:
+  - name: search_procurement_products
+    description: Search the AbilityOne Procurement List for products by NSN or description
+    operationId: searchProducts
+    api: procurement-list-api
+    parameters:
+      - name: nsn
+        description: National Stock Number to search for
+      - name: description
+        description: Product description keyword
+      - name: nonprofit
+        description: Filter by NIB or SourceAmerica affiliate
+  - name: get_product_by_nsn
+    description: Look up a specific product on the Procurement List by National Stock Number
+    operationId: getProduct
+    api: procurement-list-api
+    parameters:
+      - name: nsn
+        description: The National Stock Number (format xxxx-xx-xxx-xxxx)
+  - name: search_procurement_services
+    description: Search the AbilityOne Procurement List for services by type and location
+    operationId: searchServices
+    api: procurement-list-api
+    parameters:
+      - name: serviceType
+        description: Type of service (Custodial, Grounds Maintenance, Food Service, etc.)
+      - name: state
+        description: State where service is needed
+  - name: list_nonprofit_agencies
+    description: Find AbilityOne-participating nonprofit agencies by state or affiliate
+    operationId: listAgencies
+    api: procurement-list-api
+    parameters:
+      - name: affiliate
+        description: Filter by NIB or SourceAmerica
+      - name: state
+        description: State abbreviation to filter by
+  - name: download_products_report
+    description: Download the complete Procurement List products report for offline reference
+    operationId: downloadProductReport
+    api: procurement-list-api
+    parameters:
+      - name: format
+        description: Output format (excel or csv)
+      - name: affiliate
+        description: Filter by nonprofit affiliate
+  - name: download_services_report
+    description: Download the complete Procurement List services report for offline reference
+    operationId: downloadServiceReport
+    api: procurement-list-api
+    parameters:
+      - name: format
+        description: Output format (excel or csv)

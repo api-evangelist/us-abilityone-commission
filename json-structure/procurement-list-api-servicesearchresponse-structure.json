@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://www.abilityone.gov/structure/servicesearchresponse.json",
+  "title": "ServiceSearchResponse",
+  "description": "Paginated search results for Procurement List services",
+  "type": "record",
+  "fields": [
+    {
+      "name": "total",
+      "type": "int32"
+    },
+    {
+      "name": "offset",
+      "type": "int32"
+    },
+    {
+      "name": "limit",
+      "type": "int32"
+    },
+    {
+      "name": "services",
+      "type": {
+        "type": "array",
+        "items": "service"
+      }
+    }
+  ]
+}

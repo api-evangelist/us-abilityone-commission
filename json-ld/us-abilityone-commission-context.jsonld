@@ -1,0 +1,86 @@
+{
+  "@context": {
+    "abi": "https://www.abilityone.gov/schema/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "gov": "https://www.w3.org/ns/gov/",
+    "Product": "abi:Product",
+    "ProductSearchResponse": "abi:ProductSearchResponse",
+    "Service": "abi:Service",
+    "ServiceSearchResponse": "abi:ServiceSearchResponse",
+    "Agency": "abi:Agency",
+    "AgencyListResponse": "abi:AgencyListResponse",
+    "APIError": "abi:APIError",
+    "address": {
+      "@id": "schema:address"
+    },
+    "affiliate": "abi:affiliate",
+    "agencies": "abi:agencies",
+    "approvalDate": {
+      "@id": "abi:approvalDate",
+      "@type": "xsd:date"
+    },
+    "city": {
+      "@id": "schema:addressLocality"
+    },
+    "code": {
+      "@id": "abi:code",
+      "@type": "xsd:integer"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "employeesBlind": {
+      "@id": "abi:employeesBlind",
+      "@type": "xsd:integer"
+    },
+    "employeesDisabled": {
+      "@id": "abi:employeesDisabled",
+      "@type": "xsd:integer"
+    },
+    "error": "abi:error",
+    "federalSupplyClass": "abi:federalSupplyClass",
+    "id": "abi:id",
+    "limit": {
+      "@id": "abi:limit",
+      "@type": "xsd:integer"
+    },
+    "location": "abi:location",
+    "longDescription": "abi:longDescription",
+    "message": "abi:message",
+    "name": {
+      "@id": "schema:name"
+    },
+    "nonprofitAffiliate": "abi:nonprofitAffiliate",
+    "nsn": "abi:nsn",
+    "offset": {
+      "@id": "abi:offset",
+      "@type": "xsd:integer"
+    },
+    "performingAgency": "abi:performingAgency",
+    "phone": {
+      "@id": "schema:telephone"
+    },
+    "productGroupName": "abi:productGroupName",
+    "products": "abi:products",
+    "serviceType": "abi:serviceType",
+    "services": "abi:services",
+    "state": {
+      "@id": "schema:addressRegion"
+    },
+    "status": {
+      "@id": "schema:status"
+    },
+    "total": {
+      "@id": "abi:total",
+      "@type": "xsd:integer"
+    },
+    "unitOfMeasure": "abi:unitOfMeasure",
+    "unitPrice": {
+      "@id": "schema:price"
+    },
+    "website": {
+      "@id": "schema:url"
+    }
+  }
+}
