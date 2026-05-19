@@ -1,0 +1,148 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AbilityOne Procurement List API — Products
+  description: 'AbilityOne Procurement List API — Products. 2 operations. Lead operation: AbilityOne Search Procurement List
+    Products. Self-contained Naftiko capability covering one Us Abilityone Commission business surface.'
+  tags:
+  - Us Abilityone Commission
+  - Products
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    US_ABILITYONE_COMMISSION_API_KEY: US_ABILITYONE_COMMISSION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: abilityone-procurement-list-products
+    baseUri: https://plims.abilityone.gov
+    description: AbilityOne Procurement List API — Products business capability. Self-contained, no shared references.
+    resources:
+    - name: api-products
+      path: /api/products
+      operations:
+      - name: searchproducts
+        method: GET
+        description: AbilityOne Search Procurement List Products
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: nsn
+          in: query
+          type: string
+          description: National Stock Number (format xxxx-xx-xxx-xxxx)
+        - name: description
+          in: query
+          type: string
+          description: Product description keyword search (supports wildcards)
+        - name: nonprofit
+          in: query
+          type: string
+          description: Filter by nonprofit affiliate (NIB or SourceAmerica)
+        - name: agency
+          in: query
+          type: string
+          description: Filter by performing nonprofit agency name
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results to return
+        - name: offset
+          in: query
+          type: integer
+          description: Pagination offset
+    - name: api-products-nsn
+      path: /api/products/{nsn}
+      operations:
+      - name: getproduct
+        method: GET
+        description: AbilityOne Get Product by NSN
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: nsn
+          in: path
+          type: string
+          description: National Stock Number (format xxxx-xx-xxx-xxxx)
+          required: true
+  exposes:
+  - type: rest
+    namespace: abilityone-procurement-list-products-rest
+    port: 8080
+    description: REST adapter for AbilityOne Procurement List API — Products. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/products
+      name: api-products
+      description: REST surface for api-products.
+      operations:
+      - method: GET
+        name: searchproducts
+        description: AbilityOne Search Procurement List Products
+        call: abilityone-procurement-list-products.searchproducts
+        with:
+          nsn: rest.nsn
+          description: rest.description
+          nonprofit: rest.nonprofit
+          agency: rest.agency
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/products/{nsn}
+      name: api-products-nsn
+      description: REST surface for api-products-nsn.
+      operations:
+      - method: GET
+        name: getproduct
+        description: AbilityOne Get Product by NSN
+        call: abilityone-procurement-list-products.getproduct
+        with:
+          nsn: rest.nsn
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: abilityone-procurement-list-products-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AbilityOne Procurement List API — Products. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: abilityone-search-procurement-list-products
+      description: AbilityOne Search Procurement List Products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: abilityone-procurement-list-products.searchproducts
+      with:
+        nsn: tools.nsn
+        description: tools.description
+        nonprofit: tools.nonprofit
+        agency: tools.agency
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: abilityone-get-product-nsn
+      description: AbilityOne Get Product by NSN
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: abilityone-procurement-list-products.getproduct
+      with:
+        nsn: tools.nsn
+      outputParameters:
+      - type: object
+        mapping: $.

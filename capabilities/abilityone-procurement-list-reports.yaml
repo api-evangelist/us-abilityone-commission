@@ -1,0 +1,123 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AbilityOne Procurement List API — Reports
+  description: 'AbilityOne Procurement List API — Reports. 2 operations. Lead operation: AbilityOne Download Products List
+    Report. Self-contained Naftiko capability covering one Us Abilityone Commission business surface.'
+  tags:
+  - Us Abilityone Commission
+  - Reports
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    US_ABILITYONE_COMMISSION_API_KEY: US_ABILITYONE_COMMISSION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: abilityone-procurement-list-reports
+    baseUri: https://plims.abilityone.gov
+    description: AbilityOne Procurement List API — Reports business capability. Self-contained, no shared references.
+    resources:
+    - name: api-reports-products
+      path: /api/reports/products
+      operations:
+      - name: downloadproductreport
+        method: GET
+        description: AbilityOne Download Products List Report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: format
+          in: query
+          type: string
+          description: Report output format
+        - name: affiliate
+          in: query
+          type: string
+          description: Filter by nonprofit affiliate
+    - name: api-reports-services
+      path: /api/reports/services
+      operations:
+      - name: downloadservicereport
+        method: GET
+        description: AbilityOne Download Services List Report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: format
+          in: query
+          type: string
+          description: Report output format
+  exposes:
+  - type: rest
+    namespace: abilityone-procurement-list-reports-rest
+    port: 8080
+    description: REST adapter for AbilityOne Procurement List API — Reports. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/reports/products
+      name: api-reports-products
+      description: REST surface for api-reports-products.
+      operations:
+      - method: GET
+        name: downloadproductreport
+        description: AbilityOne Download Products List Report
+        call: abilityone-procurement-list-reports.downloadproductreport
+        with:
+          format: rest.format
+          affiliate: rest.affiliate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/reports/services
+      name: api-reports-services
+      description: REST surface for api-reports-services.
+      operations:
+      - method: GET
+        name: downloadservicereport
+        description: AbilityOne Download Services List Report
+        call: abilityone-procurement-list-reports.downloadservicereport
+        with:
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: abilityone-procurement-list-reports-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AbilityOne Procurement List API — Reports. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: abilityone-download-products-list-report
+      description: AbilityOne Download Products List Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: abilityone-procurement-list-reports.downloadproductreport
+      with:
+        format: tools.format
+        affiliate: tools.affiliate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: abilityone-download-services-list-report
+      description: AbilityOne Download Services List Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: abilityone-procurement-list-reports.downloadservicereport
+      with:
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
