@@ -48,6 +48,8 @@ apis:
       - type: JSONSchema
         url: json-schema/procurement-list-api-service-schema.json
 common:
+  - type: DomainSecurity
+    url: security/us-abilityone-commission-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/us-abilityone-commission
   - type: Website
