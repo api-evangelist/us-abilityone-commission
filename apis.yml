@@ -48,6 +48,8 @@ apis:
       - type: JSONSchema
         url: json-schema/procurement-list-api-service-schema.json
 common:
+  - type: AgenticAccess
+    url: agentic-access/us-abilityone-commission-agentic-access.yml
   - type: DomainSecurity
     url: security/us-abilityone-commission-domain-security.yml
   - type: LinkedIn
