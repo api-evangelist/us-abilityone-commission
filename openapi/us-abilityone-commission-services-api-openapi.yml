@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: AbilityOne Procurement List Agencies Services API
+  description: The AbilityOne Procurement List Information Management System (PLIMS) provides search access to the AbilityOne Procurement List — the catalog of products and services that federal agencies are mandated to procure from nonprofit agencies that employ people who are blind or have significant disabilities, under the Javits-Wagner-O'Day (JWOD) Act. This spec represents the conceptual API surface for the PLIMS system at plims.abilityone.gov.
+  version: 1.0.0
+  contact:
+    name: US AbilityOne Commission
+    url: https://www.abilityone.gov
+    email: info@abilityone.gov
+  x-generated-from: documentation
+servers:
+- url: https://plims.abilityone.gov
+  description: AbilityOne PLIMS (Procurement List Information Management System)
+security: []
+tags:
+- name: Services
+  description: AbilityOne Procurement List services
+paths:
+  /api/services:
+    get:
+      operationId: searchServices
+      summary: AbilityOne Search Procurement List Services
+      description: Search the AbilityOne Procurement List for services by type, agency, geographic location, or performing nonprofit organization.
+      tags:
+      - Services
+      parameters:
+      - name: serviceType
+        in: query
+        description: Type of service
+        schema:
+          type: string
+          enum:
+          - Custodial
+          - Grounds Maintenance
+          - Food Service
+          - Laundry
+          - Administrative
+          - Mailroom
+          - Document Destruction
+          - IT Support
+        example: Custodial
+      - name: state
+        in: query
+        description: State where service is performed (2-letter abbreviation)
+        schema:
+          type: string
+          maxLength: 2
+        example: VA
+      - name: nonprofit
+        in: query
+        description: Filter by nonprofit affiliate
+        schema:
+          type: string
+          enum:
+          - NIB
+          - SourceAmerica
+        example: SourceAmerica
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 25
+        example: 25
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+        example: 0
+      responses:
+        '200':
+          description: Procurement list service search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceSearchResponse'
+              examples:
+                searchServices200Example:
+                  summary: Default searchServices 200 response
+                  x-microcks-default: true
+                  value:
+                    total: 12
+                    offset: 0
+                    limit: 25
+                    services:
+                    - id: svc-00123
+                      serviceType: Custodial
+                      description: Custodial services at federal building
+                      location: Pentagon, Arlington, VA
+                      state: VA
+                      nonprofitAffiliate: SourceAmerica
+                      performingAgency: SERVICEMASTER
+                      approvalDate: '2010-06-01'
+                      status: active
+        '400':
+          description: Invalid search parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    APIError:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error message
+          example: NSN not found on Procurement List.
+        code:
+          type: integer
+          description: HTTP status code
+          example: 404
+    ServiceSearchResponse:
+      type: object
+      description: Paginated search results for Procurement List services
+      properties:
+        total:
+          type: integer
+          example: 12
+        offset:
+          type: integer
+          example: 0
+        limit:
+          type: integer
+          example: 25
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+    Service:
+      type: object
+      description: An AbilityOne Procurement List service
+      properties:
+        id:
+          type: string
+          description: Service identifier
+          example: svc-00123
+        serviceType:
+          type: string
+          description: Type of service
+          example: Custodial
+        description:
+          type: string
+          description: Service description
+          example: Custodial services at federal building
+        location:
+          type: string
+          description: Location where service is performed
+          example: Pentagon, Arlington, VA
+        state:
+          type: string
+          description: State abbreviation
+          example: VA
+        nonprofitAffiliate:
+          type: string
+          description: Central nonprofit affiliate
+          enum:
+          - NIB
+          - SourceAmerica
+          example: SourceAmerica
+        performingAgency:
+          type: string
+          description: Name of nonprofit agency performing the service
+          example: SERVICEMASTER
+        approvalDate:
+          type: string
+          format: date
+          description: Date service was added to the Procurement List
+          example: '2010-06-01'
+        status:
+          type: string
+          description: Service status
+          enum:
+          - active
+          - deleted
+          example: active
+externalDocs:
+  description: AbilityOne Procurement List
+  url: https://www.abilityone.gov/procurement_list/

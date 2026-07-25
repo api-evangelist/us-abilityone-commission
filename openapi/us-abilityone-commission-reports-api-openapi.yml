@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  title: AbilityOne Procurement List Agencies Reports API
+  description: The AbilityOne Procurement List Information Management System (PLIMS) provides search access to the AbilityOne Procurement List — the catalog of products and services that federal agencies are mandated to procure from nonprofit agencies that employ people who are blind or have significant disabilities, under the Javits-Wagner-O'Day (JWOD) Act. This spec represents the conceptual API surface for the PLIMS system at plims.abilityone.gov.
+  version: 1.0.0
+  contact:
+    name: US AbilityOne Commission
+    url: https://www.abilityone.gov
+    email: info@abilityone.gov
+  x-generated-from: documentation
+servers:
+- url: https://plims.abilityone.gov
+  description: AbilityOne PLIMS (Procurement List Information Management System)
+security: []
+tags:
+- name: Reports
+  description: Procurement list reports and data downloads
+paths:
+  /api/reports/products:
+    get:
+      operationId: downloadProductReport
+      summary: AbilityOne Download Products List Report
+      description: Download the complete AbilityOne Procurement List products report in Excel or CSV format, containing all NSN-identified products with performing agency and unit details.
+      tags:
+      - Reports
+      parameters:
+      - name: format
+        in: query
+        description: Report output format
+        schema:
+          type: string
+          enum:
+          - excel
+          - csv
+          default: excel
+        example: excel
+      - name: affiliate
+        in: query
+        description: Filter by nonprofit affiliate
+        schema:
+          type: string
+          enum:
+          - NIB
+          - SourceAmerica
+        example: NIB
+      responses:
+        '200':
+          description: Products list report file
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+            text/csv:
+              schema:
+                type: string
+        '400':
+          description: Invalid format parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/reports/services:
+    get:
+      operationId: downloadServiceReport
+      summary: AbilityOne Download Services List Report
+      description: Download the complete AbilityOne Procurement List services report in Excel or CSV format, containing all services with location, performing agency, and service type details.
+      tags:
+      - Reports
+      parameters:
+      - name: format
+        in: query
+        description: Report output format
+        schema:
+          type: string
+          enum:
+          - excel
+          - csv
+          default: excel
+        example: excel
+      responses:
+        '200':
+          description: Services list report file
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+            text/csv:
+              schema:
+                type: string
+        '400':
+          description: Invalid format parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    APIError:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error message
+          example: NSN not found on Procurement List.
+        code:
+          type: integer
+          description: HTTP status code
+          example: 404
+externalDocs:
+  description: AbilityOne Procurement List
+  url: https://www.abilityone.gov/procurement_list/

@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+  title: AbilityOne Procurement List Agencies API
+  description: The AbilityOne Procurement List Information Management System (PLIMS) provides search access to the AbilityOne Procurement List — the catalog of products and services that federal agencies are mandated to procure from nonprofit agencies that employ people who are blind or have significant disabilities, under the Javits-Wagner-O'Day (JWOD) Act. This spec represents the conceptual API surface for the PLIMS system at plims.abilityone.gov.
+  version: 1.0.0
+  contact:
+    name: US AbilityOne Commission
+    url: https://www.abilityone.gov
+    email: info@abilityone.gov
+  x-generated-from: documentation
+servers:
+- url: https://plims.abilityone.gov
+  description: AbilityOne PLIMS (Procurement List Information Management System)
+security: []
+tags:
+- name: Agencies
+  description: Nonprofit agencies participating in the AbilityOne program
+paths:
+  /api/agencies:
+    get:
+      operationId: listAgencies
+      summary: AbilityOne List Nonprofit Agencies
+      description: Retrieve a list of nonprofit agencies participating in the AbilityOne program, optionally filtered by affiliate (NIB or SourceAmerica) or state.
+      tags:
+      - Agencies
+      parameters:
+      - name: affiliate
+        in: query
+        description: Filter by central nonprofit agency affiliate
+        schema:
+          type: string
+          enum:
+          - NIB
+          - SourceAmerica
+        example: NIB
+      - name: state
+        in: query
+        description: Filter by state (2-letter abbreviation)
+        schema:
+          type: string
+          maxLength: 2
+        example: TX
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 50
+        example: 50
+      responses:
+        '200':
+          description: List of participating nonprofit agencies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgencyListResponse'
+              examples:
+                listAgencies200Example:
+                  summary: Default listAgencies 200 response
+                  x-microcks-default: true
+                  value:
+                    total: 93
+                    agencies:
+                    - id: agency-001
+                      name: Lighthouse for the Blind - St. Louis
+                      affiliate: NIB
+                      state: MO
+                      city: St. Louis
+                      phone: 314-842-1180
+                      website: https://www.blindmissouri.org
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Agency:
+      type: object
+      description: A nonprofit agency participating in the AbilityOne program
+      properties:
+        id:
+          type: string
+          description: Agency identifier
+          example: agency-001
+        name:
+          type: string
+          description: Agency name
+          example: Lighthouse for the Blind - St. Louis
+        affiliate:
+          type: string
+          description: Central nonprofit affiliate
+          enum:
+          - NIB
+          - SourceAmerica
+          example: NIB
+        state:
+          type: string
+          description: State abbreviation
+          example: MO
+        city:
+          type: string
+          description: City
+          example: St. Louis
+        address:
+          type: string
+          description: Mailing address
+          example: 4244 Forest Park Ave, St. Louis, MO 63108
+        phone:
+          type: string
+          description: Contact phone number
+          example: 314-842-1180
+        website:
+          type: string
+          description: Agency website URL
+          example: https://www.blindmissouri.org
+        employeesBlind:
+          type: integer
+          description: Number of employees who are blind
+          example: 125
+        employeesDisabled:
+          type: integer
+          description: Number of employees with significant disabilities
+          example: 45
+    AgencyListResponse:
+      type: object
+      description: List of nonprofit agencies
+      properties:
+        total:
+          type: integer
+          example: 93
+        agencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Agency'
+    APIError:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error message
+          example: NSN not found on Procurement List.
+        code:
+          type: integer
+          description: HTTP status code
+          example: 404
+externalDocs:
+  description: AbilityOne Procurement List
+  url: https://www.abilityone.gov/procurement_list/

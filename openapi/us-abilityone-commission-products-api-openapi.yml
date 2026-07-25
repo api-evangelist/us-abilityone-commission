@@ -1,0 +1,244 @@
+openapi: 3.0.3
+info:
+  title: AbilityOne Procurement List Agencies Products API
+  description: The AbilityOne Procurement List Information Management System (PLIMS) provides search access to the AbilityOne Procurement List — the catalog of products and services that federal agencies are mandated to procure from nonprofit agencies that employ people who are blind or have significant disabilities, under the Javits-Wagner-O'Day (JWOD) Act. This spec represents the conceptual API surface for the PLIMS system at plims.abilityone.gov.
+  version: 1.0.0
+  contact:
+    name: US AbilityOne Commission
+    url: https://www.abilityone.gov
+    email: info@abilityone.gov
+  x-generated-from: documentation
+servers:
+- url: https://plims.abilityone.gov
+  description: AbilityOne PLIMS (Procurement List Information Management System)
+security: []
+tags:
+- name: Products
+  description: AbilityOne Procurement List products identified by NSN
+paths:
+  /api/products:
+    get:
+      operationId: searchProducts
+      summary: AbilityOne Search Procurement List Products
+      description: Search the AbilityOne Procurement List for products by National Stock Number (NSN), description, agency, or nonprofit affiliate. Returns products that federal agencies are mandated to procure through the AbilityOne program.
+      tags:
+      - Products
+      parameters:
+      - name: nsn
+        in: query
+        description: National Stock Number (format xxxx-xx-xxx-xxxx)
+        schema:
+          type: string
+          pattern: ^\d{4}-\d{2}-\d{3}-\d{4}$
+        example: 7510-01-234-5678
+      - name: description
+        in: query
+        description: Product description keyword search (supports wildcards)
+        schema:
+          type: string
+        example: ballpoint pen
+      - name: nonprofit
+        in: query
+        description: Filter by nonprofit affiliate (NIB or SourceAmerica)
+        schema:
+          type: string
+          enum:
+          - NIB
+          - SourceAmerica
+        example: NIB
+      - name: agency
+        in: query
+        description: Filter by performing nonprofit agency name
+        schema:
+          type: string
+        example: Lighthouse for the Blind
+      - name: limit
+        in: query
+        description: Maximum number of results to return
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+        example: 25
+      - name: offset
+        in: query
+        description: Pagination offset
+        schema:
+          type: integer
+          default: 0
+        example: 0
+      responses:
+        '200':
+          description: Procurement list product search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSearchResponse'
+              examples:
+                searchProducts200Example:
+                  summary: Default searchProducts 200 response
+                  x-microcks-default: true
+                  value:
+                    total: 48
+                    offset: 0
+                    limit: 25
+                    products:
+                    - nsn: 7510-01-234-5678
+                      description: PEN, BALLPOINT
+                      nonprofitAffiliate: NIB
+                      performingAgency: Lighthouse for the Blind - St. Louis
+                      unitOfMeasure: DZ
+                      approvalDate: '2005-03-15'
+                      status: active
+        '400':
+          description: Invalid search parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/products/{nsn}:
+    get:
+      operationId: getProduct
+      summary: AbilityOne Get Product by NSN
+      description: Retrieve detailed information for a specific AbilityOne Procurement List product by its National Stock Number (NSN).
+      tags:
+      - Products
+      parameters:
+      - name: nsn
+        in: path
+        required: true
+        description: National Stock Number (format xxxx-xx-xxx-xxxx)
+        schema:
+          type: string
+        example: 7510-01-234-5678
+      responses:
+        '200':
+          description: Product details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+              examples:
+                getProduct200Example:
+                  summary: Default getProduct 200 response
+                  x-microcks-default: true
+                  value:
+                    nsn: 7510-01-234-5678
+                    description: PEN, BALLPOINT
+                    longDescription: Ballpoint pen, retractable, medium point, black ink
+                    nonprofitAffiliate: NIB
+                    performingAgency: Lighthouse for the Blind - St. Louis
+                    unitOfMeasure: DZ
+                    approvalDate: '2005-03-15'
+                    status: active
+                    federalSupplyClass: '7510'
+                    productGroupName: Office Supplies
+        '404':
+          description: Product not found on Procurement List
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    APIError:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error message
+          example: NSN not found on Procurement List.
+        code:
+          type: integer
+          description: HTTP status code
+          example: 404
+    Product:
+      type: object
+      description: An AbilityOne Procurement List product identified by National Stock Number
+      properties:
+        nsn:
+          type: string
+          description: National Stock Number (primary identifier)
+          example: 7510-01-234-5678
+        description:
+          type: string
+          description: Short product description
+          example: PEN, BALLPOINT
+        longDescription:
+          type: string
+          description: Detailed product description
+          example: Ballpoint pen, retractable, medium point, black ink
+        nonprofitAffiliate:
+          type: string
+          description: Central nonprofit agency affiliate (NIB or SourceAmerica)
+          enum:
+          - NIB
+          - SourceAmerica
+          example: NIB
+        performingAgency:
+          type: string
+          description: Name of the nonprofit agency producing the product
+          example: Lighthouse for the Blind - St. Louis
+        unitOfMeasure:
+          type: string
+          description: Unit of measure for ordering
+          example: DZ
+        unitPrice:
+          type: number
+          description: Unit price in USD
+          example: 4.85
+        approvalDate:
+          type: string
+          format: date
+          description: Date product was added to the Procurement List
+          example: '2005-03-15'
+        status:
+          type: string
+          description: Product status on the Procurement List
+          enum:
+          - active
+          - deleted
+          example: active
+        federalSupplyClass:
+          type: string
+          description: Federal Supply Class (FSC) code
+          example: '7510'
+        productGroupName:
+          type: string
+          description: Product group or category name
+          example: Office Supplies
+    ProductSearchResponse:
+      type: object
+      description: Paginated search results for Procurement List products
+      properties:
+        total:
+          type: integer
+          description: Total matching products
+          example: 48
+        offset:
+          type: integer
+          description: Pagination offset
+          example: 0
+        limit:
+          type: integer
+          description: Page size
+          example: 25
+        products:
+          type: array
+          description: List of matching products
+          items:
+            $ref: '#/components/schemas/Product'
+externalDocs:
+  description: AbilityOne Procurement List
+  url: https://www.abilityone.gov/procurement_list/
