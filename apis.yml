@@ -8,7 +8,19 @@ tags:
   - Nonprofit
   - Accessibility
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/us-abilityone-commission.png
 access: 3rd-Party
 created: '2024-11-20'
 modified: '2026-05-19'
@@ -23,30 +35,70 @@ description: >-
   Blind) and SourceAmerica, manage the affiliated nonprofit network.
 specificationVersion: '0.19'
 apis:
-  - aid: us-abilityone-commission:procurement-list-api
-    name: AbilityOne Procurement List API
-    description: >-
-      The Procurement List Information Management System (PLIMS) provides search access to the AbilityOne Procurement
-      List — the catalog of products (identified by NSN) and services that federal agencies are mandated to procure from
-      AbilityOne-participating nonprofit agencies. Supports search by NSN, product description, service type, agency,
-      and nonprofit affiliate.
-    humanURL: https://plims.abilityone.gov/search-products/
-    baseURL: https://plims.abilityone.gov
-    tags:
-      - Procurement
-      - Products
-      - Services
-      - NSN
-      - Federal Acquisition
-    properties:
-      - type: Documentation
-        url: https://www.abilityone.gov/procurement_list/
-      - type: OpenAPI
-        url: openapi/abilityone-procurement-list-api-openapi.yml
-      - type: JSONSchema
-        url: json-schema/procurement-list-api-product-schema.json
-      - type: JSONSchema
-        url: json-schema/procurement-list-api-service-schema.json
+- aid: us-abilityone-commission:us-abilityone-commission-agencies-api
+  name: US AbilityOne Commission Agencies API
+  description: Nonprofit agencies participating in the AbilityOne program
+  humanURL: https://plims.abilityone.gov/search-products/
+  baseURL: https://plims.abilityone.gov
+  tags:
+  - Agencies
+  properties:
+  - type: OpenAPI
+    url: openapi/us-abilityone-commission-agencies-api-openapi.yml
+  - type: Documentation
+    url: https://www.abilityone.gov/procurement_list/
+  - type: JSONSchema
+    url: json-schema/procurement-list-api-product-schema.json
+  - type: JSONSchema
+    url: json-schema/procurement-list-api-service-schema.json
+- aid: us-abilityone-commission:us-abilityone-commission-products-api
+  name: US AbilityOne Commission Products API
+  description: AbilityOne Procurement List products identified by NSN
+  humanURL: https://plims.abilityone.gov/search-products/
+  baseURL: https://plims.abilityone.gov
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/us-abilityone-commission-products-api-openapi.yml
+  - type: Documentation
+    url: https://www.abilityone.gov/procurement_list/
+  - type: JSONSchema
+    url: json-schema/procurement-list-api-product-schema.json
+  - type: JSONSchema
+    url: json-schema/procurement-list-api-service-schema.json
+- aid: us-abilityone-commission:us-abilityone-commission-reports-api
+  name: US AbilityOne Commission Reports API
+  description: Procurement list reports and data downloads
+  humanURL: https://plims.abilityone.gov/search-products/
+  baseURL: https://plims.abilityone.gov
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/us-abilityone-commission-reports-api-openapi.yml
+  - type: Documentation
+    url: https://www.abilityone.gov/procurement_list/
+  - type: JSONSchema
+    url: json-schema/procurement-list-api-product-schema.json
+  - type: JSONSchema
+    url: json-schema/procurement-list-api-service-schema.json
+- aid: us-abilityone-commission:us-abilityone-commission-services-api
+  name: US AbilityOne Commission Services API
+  description: AbilityOne Procurement List services
+  humanURL: https://plims.abilityone.gov/search-products/
+  baseURL: https://plims.abilityone.gov
+  tags:
+  - Services
+  properties:
+  - type: OpenAPI
+    url: openapi/us-abilityone-commission-services-api-openapi.yml
+  - type: Documentation
+    url: https://www.abilityone.gov/procurement_list/
+  - type: JSONSchema
+    url: json-schema/procurement-list-api-product-schema.json
+  - type: JSONSchema
+    url: json-schema/procurement-list-api-service-schema.json
 common:
   - type: AgenticAccess
     url: agentic-access/us-abilityone-commission-agentic-access.yml
