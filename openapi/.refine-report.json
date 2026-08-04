@@ -1,0 +1,20 @@
+{
+  "provider": "us-abilityone-commission",
+  "sources": [
+    "us-abilityone-commission-agencies-api-openapi.yml",
+    "us-abilityone-commission-products-api-openapi.yml",
+    "us-abilityone-commission-reports-api-openapi.yml",
+    "us-abilityone-commission-services-api-openapi.yml"
+  ],
+  "outputs": [
+    "us-abilityone-commission-agencies-api-openapi.yml",
+    "us-abilityone-commission-products-api-openapi.yml",
+    "us-abilityone-commission-reports-api-openapi.yml",
+    "us-abilityone-commission-services-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
