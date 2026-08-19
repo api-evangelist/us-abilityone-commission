@@ -33,7 +33,7 @@ description: >-
   blind or have significant disabilities. The PLIMS (Procurement List Information Management System) provides web-based
   search access to the products and services list. Two central nonprofit agencies, NIB (National Industries for the
   Blind) and SourceAmerica, manage the affiliated nonprofit network.
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: us-abilityone-commission:us-abilityone-commission-agencies-api
   name: US AbilityOne Commission Agencies API
