@@ -1,0 +1,211 @@
+{
+  "item": [
+    {
+      "id": "53265a39-3261-4c9f-a45b-3f98f84d94f4",
+      "name": "Services",
+      "description": {
+        "content": "AbilityOne Procurement List services",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "81a9fef1-6a9b-488c-844b-88475b343790",
+          "name": "AbilityOne Search Procurement List Services",
+          "request": {
+            "name": "AbilityOne Search Procurement List Services",
+            "description": {
+              "content": "Search the AbilityOne Procurement List for services by type, agency, geographic location, or performing nonprofit organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "serviceType",
+                  "value": "<string>",
+                  "description": "Type of service"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "State where service is performed (2-letter abbreviation)"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonprofit",
+                  "value": "<string>",
+                  "description": "Filter by nonprofit affiliate"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a723272-8eab-42eb-9f6e-5f60d11f56e9",
+              "name": "Procurement list service search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "serviceType",
+                      "value": "Custodial"
+                    },
+                    {
+                      "key": "state",
+                      "value": "VA"
+                    },
+                    {
+                      "key": "nonprofit",
+                      "value": "SourceAmerica"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 12,\n  \"offset\": 0,\n  \"limit\": 25,\n  \"services\": [\n    {\n      \"id\": \"svc-00123\",\n      \"serviceType\": \"Custodial\",\n      \"description\": \"Custodial services at federal building\",\n      \"location\": \"Pentagon, Arlington, VA\",\n      \"state\": \"VA\",\n      \"nonprofitAffiliate\": \"SourceAmerica\",\n      \"performingAgency\": \"SERVICEMASTER\",\n      \"approvalDate\": \"2010-06-01\",\n      \"status\": \"active\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f6f15ce-165a-49b0-a8af-53659957f910",
+              "name": "Invalid search parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "serviceType",
+                      "value": "Custodial"
+                    },
+                    {
+                      "key": "state",
+                      "value": "VA"
+                    },
+                    {
+                      "key": "nonprofit",
+                      "value": "SourceAmerica"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"NSN not found on Procurement List.\",\n  \"code\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://plims.abilityone.gov",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d35b1fea-89ae-4e33-a928-377ab7841298",
+    "name": "AbilityOne Procurement List Agencies Services API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AbilityOne Procurement List Information Management System (PLIMS) provides search access to the AbilityOne Procurement List — the catalog of products and services that federal agencies are mandated to procure from nonprofit agencies that employ people who are blind or have significant disabilities, under the Javits-Wagner-O'Day (JWOD) Act. This spec represents the conceptual API surface for the PLIMS system at plims.abilityone.gov.\n\nContact Support:\n Name: US AbilityOne Commission\n Email: info@abilityone.gov",
+      "type": "text/plain"
+    }
+  }
+}

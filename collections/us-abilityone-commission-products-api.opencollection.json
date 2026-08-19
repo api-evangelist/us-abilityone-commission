@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AbilityOne Procurement List Agencies Products API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AbilityOne Search Procurement List Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://plims.abilityone.gov/api/products",
+            "params": [
+              {
+                "name": "nsn",
+                "value": "7510-01-234-5678",
+                "type": "query",
+                "description": "National Stock Number (format xxxx-xx-xxx-xxxx)"
+              },
+              {
+                "name": "description",
+                "value": "ballpoint pen",
+                "type": "query",
+                "description": "Product description keyword search (supports wildcards)"
+              },
+              {
+                "name": "nonprofit",
+                "value": "NIB",
+                "type": "query",
+                "description": "Filter by nonprofit affiliate (NIB or SourceAmerica)"
+              },
+              {
+                "name": "agency",
+                "value": "Lighthouse for the Blind",
+                "type": "query",
+                "description": "Filter by performing nonprofit agency name"
+              },
+              {
+                "name": "limit",
+                "value": "25",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ]
+          },
+          "docs": "Search the AbilityOne Procurement List for products by National Stock Number (NSN), description, agency, or nonprofit affiliate. Returns products that federal agencies are mandated to procure through the AbilityOne program."
+        },
+        {
+          "info": {
+            "name": "AbilityOne Get Product by NSN",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://plims.abilityone.gov/api/products/:nsn",
+            "params": [
+              {
+                "name": "nsn",
+                "value": "7510-01-234-5678",
+                "type": "path",
+                "description": "National Stock Number (format xxxx-xx-xxx-xxxx)"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information for a specific AbilityOne Procurement List product by its National Stock Number (NSN)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,362 @@
+{
+  "item": [
+    {
+      "id": "d1dd416c-e2d3-45aa-9dfa-a7a756fe7e2b",
+      "name": "Products",
+      "description": {
+        "content": "AbilityOne Procurement List products identified by NSN",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fae6ae83-677e-4a36-b729-c1bb86e5ecdf",
+          "name": "AbilityOne Search Procurement List Products",
+          "request": {
+            "name": "AbilityOne Search Procurement List Products",
+            "description": {
+              "content": "Search the AbilityOne Procurement List for products by National Stock Number (NSN), description, agency, or nonprofit affiliate. Returns products that federal agencies are mandated to procure through the AbilityOne program.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nsn",
+                  "value": "<string>",
+                  "description": "National Stock Number (format xxxx-xx-xxx-xxxx)"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Product description keyword search (supports wildcards)"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonprofit",
+                  "value": "<string>",
+                  "description": "Filter by nonprofit affiliate (NIB or SourceAmerica)"
+                },
+                {
+                  "disabled": false,
+                  "key": "agency",
+                  "value": "<string>",
+                  "description": "Filter by performing nonprofit agency name"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f696f2f0-f295-4895-aa84-dc2c47ce1357",
+              "name": "Procurement list product search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nsn",
+                      "value": "7510-01-234-5678"
+                    },
+                    {
+                      "key": "description",
+                      "value": "ballpoint pen"
+                    },
+                    {
+                      "key": "nonprofit",
+                      "value": "NIB"
+                    },
+                    {
+                      "key": "agency",
+                      "value": "Lighthouse for the Blind"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 48,\n  \"offset\": 0,\n  \"limit\": 25,\n  \"products\": [\n    {\n      \"nsn\": \"7510-01-234-5678\",\n      \"description\": \"PEN, BALLPOINT\",\n      \"nonprofitAffiliate\": \"NIB\",\n      \"performingAgency\": \"Lighthouse for the Blind - St. Louis\",\n      \"unitOfMeasure\": \"DZ\",\n      \"approvalDate\": \"2005-03-15\",\n      \"status\": \"active\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65adcc99-d5b3-432d-95f9-bf694da0322e",
+              "name": "Invalid search parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nsn",
+                      "value": "7510-01-234-5678"
+                    },
+                    {
+                      "key": "description",
+                      "value": "ballpoint pen"
+                    },
+                    {
+                      "key": "nonprofit",
+                      "value": "NIB"
+                    },
+                    {
+                      "key": "agency",
+                      "value": "Lighthouse for the Blind"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"NSN not found on Procurement List.\",\n  \"code\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6835452d-e431-4a14-8aa2-c196447b76aa",
+          "name": "AbilityOne Get Product by NSN",
+          "request": {
+            "name": "AbilityOne Get Product by NSN",
+            "description": {
+              "content": "Retrieve detailed information for a specific AbilityOne Procurement List product by its National Stock Number (NSN).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                ":nsn"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nsn",
+                  "description": "(Required) National Stock Number (format xxxx-xx-xxx-xxxx)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66528a41-4783-4ddb-b165-2eb1c394d5fe",
+              "name": "Product details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":nsn"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsn",
+                      "description": "(Required) National Stock Number (format xxxx-xx-xxx-xxxx)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nsn\": \"7510-01-234-5678\",\n  \"description\": \"PEN, BALLPOINT\",\n  \"longDescription\": \"Ballpoint pen, retractable, medium point, black ink\",\n  \"nonprofitAffiliate\": \"NIB\",\n  \"performingAgency\": \"Lighthouse for the Blind - St. Louis\",\n  \"unitOfMeasure\": \"DZ\",\n  \"approvalDate\": \"2005-03-15\",\n  \"status\": \"active\",\n  \"federalSupplyClass\": \"7510\",\n  \"productGroupName\": \"Office Supplies\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48c16a04-1700-4464-998f-e0ee851c25dd",
+              "name": "Product not found on Procurement List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":nsn"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsn",
+                      "description": "(Required) National Stock Number (format xxxx-xx-xxx-xxxx)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"NSN not found on Procurement List.\",\n  \"code\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://plims.abilityone.gov",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a7606a89-a8ae-4e49-98d6-25e69f93afbd",
+    "name": "AbilityOne Procurement List Agencies Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AbilityOne Procurement List Information Management System (PLIMS) provides search access to the AbilityOne Procurement List — the catalog of products and services that federal agencies are mandated to procure from nonprofit agencies that employ people who are blind or have significant disabilities, under the Javits-Wagner-O'Day (JWOD) Act. This spec represents the conceptual API surface for the PLIMS system at plims.abilityone.gov.\n\nContact Support:\n Name: US AbilityOne Commission\n Email: info@abilityone.gov",
+      "type": "text/plain"
+    }
+  }
+}

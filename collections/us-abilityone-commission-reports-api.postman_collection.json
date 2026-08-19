@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "a14ca7b5-17b1-4201-ad9f-82abb7f6a378",
+      "name": "Reports",
+      "description": {
+        "content": "Procurement list reports and data downloads",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b16a3d77-51f8-4a6d-8fe0-bf371f09ca0e",
+          "name": "AbilityOne Download Products List Report",
+          "request": {
+            "name": "AbilityOne Download Products List Report",
+            "description": {
+              "content": "Download the complete AbilityOne Procurement List products report in Excel or CSV format, containing all NSN-identified products with performing agency and unit details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reports",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "excel",
+                  "description": "Report output format"
+                },
+                {
+                  "disabled": false,
+                  "key": "affiliate",
+                  "value": "<string>",
+                  "description": "Filter by nonprofit affiliate"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad6df0f0-bbca-4b6b-b07c-bd25fa514691",
+              "name": "Products list report file",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reports",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "excel"
+                    },
+                    {
+                      "key": "affiliate",
+                      "value": "NIB"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e516fa0a-c1c9-4e4d-b93b-2023a2159492",
+              "name": "Invalid format parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reports",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "excel"
+                    },
+                    {
+                      "key": "affiliate",
+                      "value": "NIB"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"NSN not found on Procurement List.\",\n  \"code\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "131e4ee5-3b45-4df4-a5d8-effb918d877d",
+          "name": "AbilityOne Download Services List Report",
+          "request": {
+            "name": "AbilityOne Download Services List Report",
+            "description": {
+              "content": "Download the complete AbilityOne Procurement List services report in Excel or CSV format, containing all services with location, performing agency, and service type details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reports",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "excel",
+                  "description": "Report output format"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be4b0266-7929-48c8-8a79-f66d00d7befc",
+              "name": "Services list report file",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reports",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "excel"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "981f018f-2784-4594-804a-ccfda4fd4de7",
+              "name": "Invalid format parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reports",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "excel"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"NSN not found on Procurement List.\",\n  \"code\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://plims.abilityone.gov",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "714888dc-73bc-49c9-be1c-a8451896cf3c",
+    "name": "AbilityOne Procurement List Agencies Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AbilityOne Procurement List Information Management System (PLIMS) provides search access to the AbilityOne Procurement List — the catalog of products and services that federal agencies are mandated to procure from nonprofit agencies that employ people who are blind or have significant disabilities, under the Javits-Wagner-O'Day (JWOD) Act. This spec represents the conceptual API surface for the PLIMS system at plims.abilityone.gov.\n\nContact Support:\n Name: US AbilityOne Commission\n Email: info@abilityone.gov",
+      "type": "text/plain"
+    }
+  }
+}

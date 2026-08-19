@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AbilityOne Procurement List Agencies API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agencies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AbilityOne List Nonprofit Agencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://plims.abilityone.gov/api/agencies",
+            "params": [
+              {
+                "name": "affiliate",
+                "value": "NIB",
+                "type": "query",
+                "description": "Filter by central nonprofit agency affiliate"
+              },
+              {
+                "name": "state",
+                "value": "TX",
+                "type": "query",
+                "description": "Filter by state (2-letter abbreviation)"
+              },
+              {
+                "name": "limit",
+                "value": "50",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of nonprofit agencies participating in the AbilityOne program, optionally filtered by affiliate (NIB or SourceAmerica) or state."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AbilityOne Procurement List Agencies Reports API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AbilityOne Download Products List Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://plims.abilityone.gov/api/reports/products",
+            "params": [
+              {
+                "name": "format",
+                "value": "excel",
+                "type": "query",
+                "description": "Report output format"
+              },
+              {
+                "name": "affiliate",
+                "value": "NIB",
+                "type": "query",
+                "description": "Filter by nonprofit affiliate"
+              }
+            ]
+          },
+          "docs": "Download the complete AbilityOne Procurement List products report in Excel or CSV format, containing all NSN-identified products with performing agency and unit details."
+        },
+        {
+          "info": {
+            "name": "AbilityOne Download Services List Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://plims.abilityone.gov/api/reports/services",
+            "params": [
+              {
+                "name": "format",
+                "value": "excel",
+                "type": "query",
+                "description": "Report output format"
+              }
+            ]
+          },
+          "docs": "Download the complete AbilityOne Procurement List services report in Excel or CSV format, containing all services with location, performing agency, and service type details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

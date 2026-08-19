@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AbilityOne Procurement List Agencies Services API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AbilityOne Search Procurement List Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://plims.abilityone.gov/api/services",
+            "params": [
+              {
+                "name": "serviceType",
+                "value": "Custodial",
+                "type": "query",
+                "description": "Type of service"
+              },
+              {
+                "name": "state",
+                "value": "VA",
+                "type": "query",
+                "description": "State where service is performed (2-letter abbreviation)"
+              },
+              {
+                "name": "nonprofit",
+                "value": "SourceAmerica",
+                "type": "query",
+                "description": "Filter by nonprofit affiliate"
+              },
+              {
+                "name": "limit",
+                "value": "25",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search the AbilityOne Procurement List for services by type, agency, geographic location, or performing nonprofit organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
