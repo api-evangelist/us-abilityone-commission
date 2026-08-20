@@ -2,6 +2,12 @@ aid: us-abilityone-commission
 url: https://raw.githubusercontent.com/api-evangelist/us-abilityone-commission/refs/heads/main/apis.yml
 name: US AbilityOne Commission
 tags:
+  - Federal-Government
+  - Disability Employment
+  - Procurement
+  - Non-Profit
+  - Accessibility
+tags_raw:
   - Federal Government
   - Disability Employment
   - Procurement
@@ -57,6 +63,8 @@ apis:
   humanURL: https://plims.abilityone.gov/search-products/
   baseURL: https://plims.abilityone.gov
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
