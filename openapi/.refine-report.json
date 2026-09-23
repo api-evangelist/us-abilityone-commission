@@ -1,10 +1,7 @@
 {
   "provider": "us-abilityone-commission",
   "sources": [
-    "us-abilityone-commission-agencies-api-openapi.yml",
-    "us-abilityone-commission-products-api-openapi.yml",
-    "us-abilityone-commission-reports-api-openapi.yml",
-    "us-abilityone-commission-services-api-openapi.yml"
+    "_ae-authored/abilityone-procurement-list-api-openapi.yml"
   ],
   "outputs": [
     "us-abilityone-commission-agencies-api-openapi.yml",
@@ -16,11 +13,14 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "us-abilityone-commission-agencies-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "us-abilityone-commission-products-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "us-abilityone-commission-reports-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "us-abilityone-commission-services-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "abilityone-procurement-list-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "us-abilityone-commission-agencies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "us-abilityone-commission-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "us-abilityone-commission-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "us-abilityone-commission-services-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

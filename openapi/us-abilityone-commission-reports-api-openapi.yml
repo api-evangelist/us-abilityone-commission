@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: AbilityOne Procurement List Agencies Reports API
+  title: AbilityOne Procurement List Reports API
   description: The AbilityOne Procurement List Information Management System (PLIMS) provides search access to the AbilityOne Procurement List — the catalog of products and services that federal agencies are mandated to procure from nonprofit agencies that employ people who are blind or have significant disabilities, under the Javits-Wagner-O'Day (JWOD) Act. This spec represents the conceptual API surface for the PLIMS system at plims.abilityone.gov.
   version: 1.0.0
   contact:

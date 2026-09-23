@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: AbilityOne Procurement List Agencies Products API
+  title: AbilityOne Procurement List Products API
   description: The AbilityOne Procurement List Information Management System (PLIMS) provides search access to the AbilityOne Procurement List — the catalog of products and services that federal agencies are mandated to procure from nonprofit agencies that employ people who are blind or have significant disabilities, under the Javits-Wagner-O'Day (JWOD) Act. This spec represents the conceptual API surface for the PLIMS system at plims.abilityone.gov.
   version: 1.0.0
   contact:
@@ -147,6 +147,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ProductSearchResponse:
+      type: object
+      description: Paginated search results for Procurement List products
+      properties:
+        total:
+          type: integer
+          description: Total matching products
+          example: 48
+        offset:
+          type: integer
+          description: Pagination offset
+          example: 0
+        limit:
+          type: integer
+          description: Page size
+          example: 25
+        products:
+          type: array
+          description: List of matching products
+          items:
+            $ref: '#/components/schemas/Product'
     APIError:
       type: object
       description: API error response
@@ -218,27 +239,6 @@ components:
           type: string
           description: Product group or category name
           example: Office Supplies
-    ProductSearchResponse:
-      type: object
-      description: Paginated search results for Procurement List products
-      properties:
-        total:
-          type: integer
-          description: Total matching products
-          example: 48
-        offset:
-          type: integer
-          description: Pagination offset
-          example: 0
-        limit:
-          type: integer
-          description: Page size
-          example: 25
-        products:
-          type: array
-          description: List of matching products
-          items:
-            $ref: '#/components/schemas/Product'
 externalDocs:
   description: AbilityOne Procurement List
   url: https://www.abilityone.gov/procurement_list/
