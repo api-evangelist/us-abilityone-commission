@@ -2,7 +2,7 @@ aid: us-abilityone-commission
 url: https://raw.githubusercontent.com/api-evangelist/us-abilityone-commission/refs/heads/main/apis.yml
 name: US AbilityOne Commission
 tags:
-  - Federal-Government
+  - Federal Government
   - Disability Employment
   - Procurement
   - Non-Profit
@@ -13,6 +13,7 @@ tags_raw:
   - Procurement
   - Nonprofit
   - Accessibility
+  - Federal-Government
 type: Index
 deliveryModel:
   model: unknown
