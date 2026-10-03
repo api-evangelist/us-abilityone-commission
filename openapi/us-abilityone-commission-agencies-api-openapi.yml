@@ -78,6 +78,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    APIError:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error message
+          example: NSN not found on Procurement List.
+        code:
+          type: integer
+          description: HTTP status code
+          example: 404
     Agency:
       type: object
       description: A nonprofit agency participating in the AbilityOne program
@@ -125,22 +141,6 @@ components:
           type: integer
           description: Number of employees with significant disabilities
           example: 45
-    APIError:
-      type: object
-      description: API error response
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: not_found
-        message:
-          type: string
-          description: Human-readable error message
-          example: NSN not found on Procurement List.
-        code:
-          type: integer
-          description: HTTP status code
-          example: 404
     AgencyListResponse:
       type: object
       description: List of nonprofit agencies

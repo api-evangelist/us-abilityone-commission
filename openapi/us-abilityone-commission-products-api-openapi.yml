@@ -147,27 +147,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ProductSearchResponse:
-      type: object
-      description: Paginated search results for Procurement List products
-      properties:
-        total:
-          type: integer
-          description: Total matching products
-          example: 48
-        offset:
-          type: integer
-          description: Pagination offset
-          example: 0
-        limit:
-          type: integer
-          description: Page size
-          example: 25
-        products:
-          type: array
-          description: List of matching products
-          items:
-            $ref: '#/components/schemas/Product'
     APIError:
       type: object
       description: API error response
@@ -239,6 +218,27 @@ components:
           type: string
           description: Product group or category name
           example: Office Supplies
+    ProductSearchResponse:
+      type: object
+      description: Paginated search results for Procurement List products
+      properties:
+        total:
+          type: integer
+          description: Total matching products
+          example: 48
+        offset:
+          type: integer
+          description: Pagination offset
+          example: 0
+        limit:
+          type: integer
+          description: Page size
+          example: 25
+        products:
+          type: array
+          description: List of matching products
+          items:
+            $ref: '#/components/schemas/Product'
 externalDocs:
   description: AbilityOne Procurement List
   url: https://www.abilityone.gov/procurement_list/
