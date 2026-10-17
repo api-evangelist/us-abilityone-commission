@@ -103,6 +103,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ServiceSearchResponse:
+      type: object
+      description: Paginated search results for Procurement List services
+      properties:
+        total:
+          type: integer
+          example: 12
+        offset:
+          type: integer
+          example: 0
+        limit:
+          type: integer
+          example: 25
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
     Service:
       type: object
       description: An AbilityOne Procurement List service
@@ -150,23 +167,6 @@ components:
           - active
           - deleted
           example: active
-    ServiceSearchResponse:
-      type: object
-      description: Paginated search results for Procurement List services
-      properties:
-        total:
-          type: integer
-          example: 12
-        offset:
-          type: integer
-          example: 0
-        limit:
-          type: integer
-          example: 25
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service'
     APIError:
       type: object
       description: API error response

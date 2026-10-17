@@ -78,6 +78,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AgencyListResponse:
+      type: object
+      description: List of nonprofit agencies
+      properties:
+        total:
+          type: integer
+          example: 93
+        agencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Agency'
     Agency:
       type: object
       description: A nonprofit agency participating in the AbilityOne program
@@ -125,17 +136,6 @@ components:
           type: integer
           description: Number of employees with significant disabilities
           example: 45
-    AgencyListResponse:
-      type: object
-      description: List of nonprofit agencies
-      properties:
-        total:
-          type: integer
-          example: 93
-        agencies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Agency'
     APIError:
       type: object
       description: API error response
